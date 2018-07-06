@@ -1,0 +1,14 @@
+<div class="py-3 mt-3 row bg-success rounded">
+    <img src="${data[i].image}" class= " col-5 col-lg-4 img-fluid w-100 mx-auto" >
+    <div class = "header col-lg-8 col-12">
+        <a id="title" href = "${data[i].link}">
+            ${data[i].title}
+        </a>
+        <p id="resultSum">
+            ${data[i].summary}
+        </p>
+        <button type="button" class="btn btn-lg col-12 col-lg-4 btn-warning comment" data-id="${data[i]._id}">
+            What do you Think?
+        </button>
+    </div>
+</div>

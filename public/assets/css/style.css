@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald|Raleway');
+
+#bodyBack {
+  background-image: url("../images/wood.jpg");
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+}
+
+#articles {
+  text-align: center;
+  color: black;
+}
+
+#top {
+  font-family: "Oswald", sans-serif;
+}
+
+#title{
+  font-family: "Oswald", sans-serif;
+  font-size: 2em;
+  text-decoration: none;
+  color: #90F4E4;
+  margin-bottom: 3em;
+}
+
+#title:hover{
+  font-size: 2.5em;
+  text-decoration: underline;
+  color: #F2CD60;
+}
+
+.btn{
+  background-color: #F97431;
+}
+
