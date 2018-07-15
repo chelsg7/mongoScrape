@@ -1,6 +1,7 @@
+// Routes
 var db = require("../models")
-var axios = require("axios");
-var cheerio = require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 //const env = require('../.env');  
 
 
@@ -8,28 +9,20 @@ module.exports = function(app) {
 // A GET route for scraping the echoJS website
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with request
-  axios.get("http://www.newsobserver.com/news/local/").then(function(response) {
+  axios.get("https://www.nytimes.com/").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $(".teaser").each(function(i, element) {
+    $("article.story").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
       // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .find("h4")
-        .text();
-      result.summary = $(this)
-        .find("p")
-        .text();
-      result.link =   $(this)
-        .find("a")
-        .attr("href"); 
-      result.image =  $(this)
-        .find("img")
-        .attr("src");
+      result.summary = $(element).children("p.summary").text();
+      result.byline = $(element).children("p.byline").text();
+      result.title = $(element).children("h2").text();
+      result.link = $(element).children("h2").children("a").attr("href");
 
       // Create a new Article using the `result` object built from scraping
       db.articles.create(result)
