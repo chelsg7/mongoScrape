@@ -1,31 +1,95 @@
-<section class = "container-flex bg-dark" id="bodyBack">
-  <div class = "navbar" id="top">
-    <div class = "container">
-      <h1 class= "h1 navbar-text text-warning">
-        Scrape It Up
+<navbar class=" navbar navbar-expand-lg navbar-dark bg-primary sticky-top mx-auto text-center">
+  <div class = "nav-brand col-12 col-sm col-md-8">
+    <h1 class="nav-item text-white">
+        <i class="fas fa-newspaper"></i>
+        &nbsp;
+        New York Times Article Scraper
       </h1>
-      <h2 class = "h2 navbar-text text-warning">
-        Easy Local News
-      </h2>
-      <button class="btn btn-lg btn-warning navbar-item" id="scraper">
+  </div>
+  <div class = "col-12 col-sm col-md-2 my-1 nav-item">
+    {{!-- <div class="nav-item"> --}}
+      <button class="btn-lg btn-secondary" id="scrape" data-toggle="modal" data-target="#alertModal">
+        <i class="fas fa-plus-circle"></i>
+        &nbsp;
         Scrape New Articles
       </button>
-    </div>
-    </div>
-      <div class = "container">
-        <div id="articles">
-            
+    {{!-- </div> --}}
+  </div>
+  <div class = "col-12 col-sm col-md-2 my-1 nav-item">
+    {{!-- <div class = "nav-item"> --}}
+      <a href="/articles/viewSaved"><button class="btn-lg btn-secondary" id="viewSaved">
+        <i class="fas fa-bookmark"></i>
+        &nbsp;
+        View Saved Articles
+      </button></a>
+    {{!-- </div> --}}
+  </div>
+</navbar>
+{{!-- <div class="filler"></div> --}}
+<div class ="container">
+  {{#each articles}}
+  {{#unless saved}}
+    <figure class="storyPanel card clearfix my-4 border-info">
+      <div class = "card-header">
+        <div class = "row mx-auto text-center">
+          <a href="{{storyUrl}}" class="storyLink" target="_blank">
+            <div class="card-img-top mx-auto text-center">
+              <img src="{{imgUrl}}" alt="" class="storyImg mx-auto img-fluid">
+            </div>
+          </a>
+          <div class="col-12 col-md-8">
+            {{#if storyUrl}}
+              <a href="{{storyUrl}}" class="storyLink" target="_blank">
+                <h2 class="storyHeadline h2">
+                  {{headline}}
+                </h2>
+              </a>
+            {{else}}
+              <h3 class="storyHeadline h2">
+                {{headline}}
+              </h3>
+            {{/if}}
+            <h5 class="storyByline h3 lead">
+              {{byLine}}
+            </h5>
+          </div>
         </div>
-        <div id="comment">
-          
-        </div>
-        {{!-- {{{article/articles}}}
-        {{{comment/comments}}} --}}
       </div>
-      {{!-- <div class="container">
-        <div id="comment">
-          
-        </div>
-      </div> --}}
+      <div class = "card-body col-md-10 col-12 mx-auto text-center">
+      <h6 class="storySummary lead">{{summary}}</h6>
+      </div>
+      <button class="storyButton btn-lg btn-success col-12 col-md-4 mx-auto mb-2" id="saveArticle" data-id="{{_id}}">
+        Save Article
+        </button>
+    </figure>
+    {{/unless}}
+    {{/each}}
+</div>
+
+{{!-- Modal for alerting number of scraped articles --}}
+<div id="alertModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h2>You have scraped <span id="numArticles"></span> new articles</h2>
+      </div>
     </div>
-</section>
+  </div>
+</div>
+
+{{!-- error modal --}}
+<div id="error" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h2>There was an error processing your request.  Please try again later.</h2>
+      </div>
+    </div>
+  </div>
+</div>

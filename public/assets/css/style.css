@@ -1,0 +1,8 @@
+body{
+    background-image: url("../images/wood.jpg");
+    height: 100%;
+}
+
+.card {
+    background-color: #b5c7d9;
+}
