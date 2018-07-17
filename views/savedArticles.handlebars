@@ -13,28 +13,42 @@
     {{#each articles}}
     {{#if saved}}
       <figure class="card storyPanel clearfix mx-auto text-center my-4">
-        <a href="{{storyUrl}}" class="pull-right" target="_blank">
-          <div class="imgBox">
-            <img src="{{imgUrl}}" alt="" class="storyImg" height="150">
+        <div class = "card-header">
+          <div class = "row mx-auto text-center">
+            <a href="{{storyUrl}}" class="storyLink" target="_blank">
+              <div class="card-img-top mx-auto text-center">
+                <img src="{{imgUrl}}" alt="" class="storyImg mx-auto img-fluid">
+              </div>
+            </a>
+            <div class="col-12 col-md-8">
+              {{#if storyUrl}}
+                <a href="{{storyUrl}}" class="storyLink" target="_blank">
+                  <h2 class="storyHeadline">{{headline}}</h2>
+                </a>
+              {{else}}
+                <h3 class="storyHeadline h2">
+                  {{headline}}
+                </h3>
+              {{/if}}
+              <h5 class="storyByline h3 lead">
+                {{byLine}}
+              </h5>
+            </div>
           </div>
-        </a>
-        {{#if storyUrl}}
-          <a href="{{storyUrl}}" class="storyLink" target="_blank">
-            <h2 class="storyHeadline">{{headline}}</h2>
-          </a>
-        {{else}}
-          <h3 class="storyHeadline">{{headline}}</h3>
-        {{/if}}
-        <h5 class="storyByline">
-          {{byLine}}
-        </h5>
-        <h6 class="storySummary">
-          {{summary}}
-        </h6>
-        <button class="addNote storyButton btn-lg col-3 btn-success my-2 mx-auto" data-id="{{_id}}">
-          Add Note
-        </button>
-        <button class="deleteArticle storyButton btn-lg col-3 btn-success my-2 mx-auto" data-id="{{_id}}">Delete Article</button>
+        </div>
+        <div class = "card-body col-md-10 col-12 mx-auto text-center">
+          <h6 class="storySummary h6 lead">
+            {{summary}}
+          </h6>
+        </div>
+        <div class = "btn-group">
+          <button class="addNote storyButton btn-lg col-3 btn-success my-2 mx-auto" data-id="{{_id}}">
+            Add Note
+          </button>
+          <button class="deleteArticle storyButton btn-lg col-3 btn-success my-2 mx-auto" data-id="{{_id}}">
+            Delete Article
+          </button>
+        </div>
       </figure>
     {{/if}}
   {{/each}}
@@ -42,25 +56,30 @@
     
 
   {{!-- modal for displaying and creating notes --}}
-  <div id="noteModal" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title text-center">Add a note</h4>
-        </div>
-        <div class="modal-body">
-          <input type="text" id="noteTitleEntry" class="noteInput" placeholder="Enter Title">
-          <input type="text" id="noteBodyEntry" class="noteInput" placeholder="Enter Body">
-          <div id="noteArea"></div>
-        </div>
-        <div class="modal-footer">
-          <h5 class="instructions">Click the note to read it, or X to delete</h5>
-          <button type="button" id="submitNote">Save Note</button>
-        </div>
+<div class="modal fade" id="noteModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title mx-auto text-center h3 col-12">
+          Add a Note
+        </h5>
+      </div>
+      <div class="modal-body mx-auto text-center">
+        <div class="col-10 mx-auto text-center" id="noteArea"></div>
+        <input type="text" id="noteTitleEntry" class="noteInput text-center mx-auto col-10" placeholder="Enter Title">
+        <textarea type="text" id="noteBodyEntry" class="noteInput text-center mx-auto col-10" placeholder="Enter Body"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary col-3 mx-auto" id="submitNote">
+          Save Notes
+        </button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     </div>
   </div>
+</div>
 
   {{!-- error modal --}}
   <div id="error" class="modal fade" role="dialog">
